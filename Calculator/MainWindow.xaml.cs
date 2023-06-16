@@ -19,7 +19,7 @@ namespace Calculator
     public partial class MainWindow : Window
     {
 
-        private float firstNumber = 0 , secondNumber = 0 , result = 0;
+        private double lastNumber = 0, result = 0;
         private string operation;
 
         public MainWindow()
@@ -32,8 +32,7 @@ namespace Calculator
             Button clickedButton = (Button)sender;
             string buttonContent = clickedButton.Content.ToString();
 
-
-            if(resultLabel.Content.ToString() == "0")
+            if (resultLabel.Content.ToString() == "0")
             {
                 resultLabel.Content = buttonContent;
             }
@@ -43,93 +42,33 @@ namespace Calculator
             }
         }
 
+        private void OperationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(double.TryParse(resultLabel.Content.ToString() , out lastNumber))
+            {
+                Button clickedButton = (Button)sender;
+                operation = clickedButton.Content.ToString();
+                result = lastNumber;
+                resultLabel.Content = "0";
+
+            }
+        }
+
+
+
         private void negativeButton_Click(object sender, RoutedEventArgs e)
         {
-            if (resultLabel.Content.ToString() != "0")
+            if (double.TryParse(resultLabel.Content.ToString() , out lastNumber))
             {
-                resultLabel.Content = $"-{resultLabel.Content}";
+                lastNumber *= -1;
+                resultLabel.Content = lastNumber.ToString();
             }
+            
         }
 
         private void percentageButton_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void divisionButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (resultLabel.Content.ToString() != "0" && int.TryParse(resultLabel.Content.ToString(), out int number))
-            {
-                Button clickedButton = (Button)sender;
-                string buttonContent = clickedButton.Content.ToString();
-
-                firstNumber = number;
-                operation = buttonContent;
-                resultLabel.Content = $"{resultLabel.Content} {buttonContent}";
-            }
-
-            else
-            {
-                resultLabel.Content = "0" ;
-            }
-
-        }
-
-        private void muliplicationButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultLabel.Content.ToString() != "0" && int.TryParse(resultLabel.Content.ToString(), out int number))
-            {
-                Button clickedButton = (Button)sender;
-                string buttonContent = clickedButton.Content.ToString();
-
-                firstNumber = number;
-                operation = buttonContent;
-                resultLabel.Content = $"{resultLabel.Content} {buttonContent}";
-            }
-
-            else
-            {
-                resultLabel.Content = "0";
-            }
-        }
-
-
-        private void subtractionButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultLabel.Content.ToString() != "0" && int.TryParse(resultLabel.Content.ToString(), out int number))
-            {
-                Button clickedButton = (Button)sender;
-                string buttonContent = clickedButton.Content.ToString();
-
-                firstNumber = number;
-                operation = buttonContent;
-                resultLabel.Content = $"{resultLabel.Content} {buttonContent}";
-            }
-
-            else
-            {
-                resultLabel.Content = "0";
-            }
-        }
-
-
-        private void additionButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultLabel.Content.ToString() != "0" && int.TryParse(resultLabel.Content.ToString(), out int number))
-            {
-                Button clickedButton = (Button)sender;
-                string buttonContent = clickedButton.Content.ToString();
-
-                firstNumber = number;
-                operation = buttonContent;
-                resultLabel.Content = $"{resultLabel.Content} {buttonContent}";
-            }
-
-            else
-            {
-                resultLabel.Content = "0";
-            }
         }
 
         private void acButton_Click(object sender, RoutedEventArgs e)
@@ -144,33 +83,31 @@ namespace Calculator
 
         private void equalButton_Click(object sender, RoutedEventArgs e)
         {
-            if (resultLabel.Content.ToString() != "0" && !int.TryParse(resultLabel.Content.ToString(), out int number))
-            {
-                secondNumber = int.Parse(resultLabel.Content.ToString().Substring(resultLabel.Content.ToString().Length - 1));
 
-                if(operation == "*")
+
+            if(double.TryParse(resultLabel.Content.ToString(), out lastNumber)){
+                if (operation == "*")
                 {
-                    result = firstNumber * secondNumber;
+                    result *= lastNumber;
                 }
-                else if(operation == "/")
+                if (operation == "+")
                 {
-                    result = firstNumber / secondNumber   ;
+                    result += lastNumber;
                 }
-                else if (operation == "+")
+                if (operation == "/")
                 {
-                    result = firstNumber + secondNumber;
+                    result /= lastNumber;
                 }
-                else if (operation == "-")
+                if (operation == "-")
                 {
-                    result = firstNumber - secondNumber;
+                    result -= lastNumber;
                 }
 
-                resultLabel.Content = $"{result}";
+                resultLabel.Content = result.ToString();
+
             }
 
-            else
-            {
-            }
+
         }
     }
 }

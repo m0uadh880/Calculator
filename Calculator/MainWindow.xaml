@@ -52,7 +52,7 @@
                 FontSize="30"
                 Margin="5"/>
         <Button x:Name="divisionButton"
-                Click="divisionButton_Click"
+                Click="OperationButton_Click"
                 Grid.Column="3"
                 Grid.Row="1"
                 Content="/"
@@ -80,7 +80,7 @@
                 FontSize="30"
                 Margin="5"/>
         <Button x:Name="muliplicationButton"
-                Click="muliplicationButton_Click"
+                Click="OperationButton_Click"
                 Grid.Column="3"
                 Grid.Row="2"
                 Content="*"
@@ -108,7 +108,7 @@
                 FontSize="30"
                 Margin="5"/>
         <Button x:Name="subtractionButton"
-                Click="subtractionButton_Click"
+                Click="OperationButton_Click"
                 Grid.Column="3"
                 Grid.Row="3"
                 Content="-"
@@ -136,7 +136,7 @@
                 FontSize="30"
                 Margin="5"/>
         <Button x:Name="additionButton"
-                Click="additionButton_Click"
+                Click="OperationButton_Click"
                 Grid.Column="3"
                 Grid.Row="4"
                 Content="+"
