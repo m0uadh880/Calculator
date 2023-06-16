@@ -29,8 +29,7 @@ namespace Calculator
 
         private void numberButton_Click(object sender, RoutedEventArgs e)
         {
-            Button clickedButton = (Button)sender;
-            string buttonContent = clickedButton.Content.ToString();
+            string buttonContent = (sender as Button).Content.ToString();
 
             if (resultLabel.Content.ToString() == "0")
             {
@@ -46,8 +45,7 @@ namespace Calculator
         {
             if(double.TryParse(resultLabel.Content.ToString() , out lastNumber))
             {
-                Button clickedButton = (Button)sender;
-                operation = clickedButton.Content.ToString();
+                operation = (sender as Button).Content.ToString();
                 result = lastNumber;
                 resultLabel.Content = "0";
 
@@ -68,7 +66,11 @@ namespace Calculator
 
         private void percentageButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (double.TryParse(resultLabel.Content.ToString(), out lastNumber))
+            {
+                lastNumber /= 100 ;
+                resultLabel.Content = lastNumber.ToString();
+            }
         }
 
         private void acButton_Click(object sender, RoutedEventArgs e)
@@ -78,7 +80,8 @@ namespace Calculator
 
         private void pointButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if(!resultLabel.Content.ToString().Contains(','))
+                resultLabel.Content = $"{resultLabel.Content},";
         }
 
         private void equalButton_Click(object sender, RoutedEventArgs e)
@@ -96,7 +99,15 @@ namespace Calculator
                 }
                 if (operation == "/")
                 {
-                    result /= lastNumber;
+                    try
+                    {
+                        if (lastNumber == 0)
+                            throw new Exception();
+                        result /= lastNumber;
+                    }
+                    catch(Exception ex) { 
+                        MessageBox.Show("Division by 0 is not supported !", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
                 if (operation == "-")
                 {
@@ -104,7 +115,6 @@ namespace Calculator
                 }
 
                 resultLabel.Content = result.ToString();
-
             }
 
 

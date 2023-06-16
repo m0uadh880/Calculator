@@ -14,3 +14,4 @@ C:\Users\Msi Rtx\source\repos\Calculator\Calculator\obj\Debug\Calculator.csproj.
 C:\Users\Msi Rtx\source\repos\Calculator\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
 C:\Users\Msi Rtx\source\repos\Calculator\Calculator\obj\Debug\Calculator.exe
 C:\Users\Msi Rtx\source\repos\Calculator\Calculator\obj\Debug\Calculator.pdb
+C:\Users\Msi Rtx\source\repos\Calculator\Calculator\obj\Debug\App.baml
